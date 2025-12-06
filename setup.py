@@ -1,7 +1,6 @@
 from setuptools import find_packages,setup
 from typing import List
 
-ifsetup='-stup'
 def get_requirements(file_path:str)->List[str]:
     '''
     this function will return the list of requirements
@@ -11,8 +10,6 @@ def get_requirements(file_path:str)->List[str]:
         requirements=file_obj.readlines()
         requirements=[req.replace("\n","") for req in requirements]
 
-        if ifsetup in requirements:
-            requirements.remove(ifsetup)
     
     return requirements
 
