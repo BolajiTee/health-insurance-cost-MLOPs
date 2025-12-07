@@ -32,7 +32,7 @@ def transformation_config():
         logging.info("creating preprocessor")
         preprocessor = ColumnTransformer(
             [
-                ("numeric_pipeline", num_pipelines, num_features)
+                ("numeric_pipeline", num_pipelines, num_features),
                 ("categorical_pipeline", cat_pipelines, cat_features)
             ]
         )

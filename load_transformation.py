@@ -56,8 +56,8 @@ def transform_data():
         test_target = test_data[target_column]
         
         logging.info("Applying preprocessor - Fit_transform on train and only transform on test")
-        preprocessor.fit_transform(train_features)
-        preprocessor.transform(test_features)
+        train_features = preprocessor.fit_transform(train_features)
+        test_features = preprocessor.transform(test_features)
         
         logging("creating an array of our train and test data")
         train_arr = np.c_[
