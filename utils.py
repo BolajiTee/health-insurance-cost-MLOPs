@@ -4,7 +4,9 @@ from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.model_selection import GridSearchCV
 from log_exception import logging, CustomException
+from sklearn.metrics import r2_score
 import dill
 
 
@@ -92,6 +94,7 @@ def params():
                 }
                 
             }
+        return params
         
     except Exception as e:
         raise CustomException(e, sys)

@@ -68,7 +68,7 @@ def transform_data():
             test_features, np.array(test_target)
         ]
         
-        logging.info("saving our preprocessed data")
+        logging.info(f'saving our preprocessed data{train_arr},{test_arr}')
         return(
             train_arr, test_arr, preprocessor
         )

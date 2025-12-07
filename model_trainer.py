@@ -16,10 +16,10 @@ from load_transformation import transform_data
 from utils import evaluate_models, save_config, params
 
 
-def train_model(train_arr,test_arr):
+def train_model():
         try:
             logging.info("calling the train and test array")
-            train_arr, test_arr = transform_data()
+            train_arr, test_arr, preprocessor = transform_data()
             logging.info("Split training and test input data")
             X_train,y_train,X_test,y_test=(
                 train_arr[:,:-1],
@@ -37,9 +37,9 @@ def train_model(train_arr,test_arr):
                 "AdaBoost Regressor": AdaBoostRegressor(),
             }
             
-
+            logging.info("evaluating model for best model")
             model_report:dict=evaluate_models(X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test,
-                                             models=models,param=params)
+                                             models=models,param=params())
             
             ## To get best model score from dict
             best_model_score = max(sorted(model_report.values()))
@@ -53,9 +53,9 @@ def train_model(train_arr,test_arr):
 
             if best_model_score<0.8:
                 raise CustomException("No best model found")
-            logging.info(f"Best found model on both training and testing dataset")
+            logging.info("Best found model on both training and testing dataset")
             
-            logging.info("saving best model")
+            logging.info(f'saving {best_model} as the best model')
             best_model_path = os.path.join("datasets", "best_model.pkl")
             
             save_config(
