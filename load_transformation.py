@@ -33,7 +33,7 @@ def load_data():
             test_data_path
         )
     except Exception as e:
-        raise CustomException(sys,e)
+        raise CustomException(e, sys)
     
     
 def transform_data():
@@ -59,7 +59,7 @@ def transform_data():
         train_features = preprocessor.fit_transform(train_features)
         test_features = preprocessor.transform(test_features)
         
-        logging("creating an array of our train and test data")
+        logging.info("creating an array of our train and test data")
         train_arr = np.c_[
             train_features, np.array(train_target)
         ]
@@ -78,9 +78,13 @@ def transform_data():
     
     
 def save_preprocessor():
-    preprocessor_path = os.join.path("datasets", "preprocessor.pkl")
-    preprocessor = transformation_config()
-    
-    return (
-        save_config(preprocessor_path, preprocessor)
-    )
+    try:
+        logging.info("creating path and pkl file of our preprocessor")
+        preprocessor_path = os.path.join("datasets", "preprocessor.pkl")
+        preprocessor = transformation_config()
+        
+        return (
+            save_config(preprocessor_path, preprocessor)
+        )  
+    except Exception as e :
+        raise CustomException(e,sys)
