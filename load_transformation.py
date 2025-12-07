@@ -1,8 +1,10 @@
 import os
 import sys
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split
 from log_exception import logging, CustomException
+from utils import transformation_config, save_config
 
 def load_data():
     try:
@@ -35,4 +37,50 @@ def load_data():
     
     
 def transform_data():
-    pass
+    try:
+        logging.info("creating an instance preprocessor")
+        preprocessor = transformation_config()
+        
+        logging.info("loading our train and test data before applying preprocessor on them")
+        train_data = pd.read_csv("datasets/train_data.csv")
+        test_data = pd.read_csv("datasets/test_data.csv")
+        
+        logging.info("separate features from target")
+        target_column = "charges"
+        
+        
+        train_features = train_data.drop(columns=[target_column], axis=1)
+        train_target = train_data[target_column]
+        
+        test_features = test_data.drop(columns=[target_column], axis=1)
+        test_target = test_data[target_column]
+        
+        logging.info("Applying preprocessor - Fit_transform on train and only transform on test")
+        preprocessor.fit_transform(train_features)
+        preprocessor.transform(test_features)
+        
+        logging("creating an array of our train and test data")
+        train_arr = np.c_[
+            train_features, np.array(train_target)
+        ]
+        
+        test_arr = np.c_[
+            test_features, np.array(test_target)
+        ]
+        
+        logging.info("saving our preprocessed data")
+        return(
+            train_arr, test_arr, preprocessor
+        )
+        
+    except Exception as e:
+        raise CustomException(e,sys)
+    
+    
+def save_preprocessor():
+    preprocessor_path = os.join.path("datasets", "preprocessor.pkl")
+    preprocessor = transformation_config()
+    
+    return (
+        save_config(preprocessor_path, preprocessor)
+    )
