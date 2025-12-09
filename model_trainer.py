@@ -1,5 +1,6 @@
 import os 
 import sys
+import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.tree import DecisionTreeRegressor
@@ -66,7 +67,13 @@ def train_model():
             predicted=best_model.predict(X_test)
 
             r2_square = r2_score(y_test, predicted)
-            return r2_square
+            logging.info(f'The accuracy of the best model is {r2_score(y_test, predicted)*100}')
+            
+            pred_df=pd.DataFrame({'Actual Value':y_test,'Predicted Value':predicted,'Difference':y_test-predicted})
+            logging.info(f'The difference between the actual and predicted values are: {pred_df}')
+            return(
+                r2_square, pred_df
+            )
                 
         except Exception as e:
             raise CustomException(e,sys)
