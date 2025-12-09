@@ -20,7 +20,7 @@ from utils import evaluate_models, save_config, params
 def train_model():
         try:
             logging.info("calling the train and test array")
-            train_arr, test_arr, preprocessor = transform_data()
+            (train_arr, test_arr, preprocessor) = transform_data()
             logging.info("Split training and test input data")
             X_train,y_train,X_test,y_test=(
                 train_arr[:,:-1],
@@ -68,6 +68,7 @@ def train_model():
 
             r2_square = r2_score(y_test, predicted)
             logging.info(f'The accuracy of the best model is {r2_score(y_test, predicted)*100}')
+            
             
             pred_df=pd.DataFrame({'Actual Value':y_test,'Predicted Value':predicted,'Difference':y_test-predicted})
             logging.info(f'The difference between the actual and predicted values are: {pred_df}')
