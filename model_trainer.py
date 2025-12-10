@@ -1,6 +1,7 @@
-import os 
+import os
 import sys
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.tree import DecisionTreeRegressor
@@ -72,8 +73,14 @@ def train_model():
             
             pred_df=pd.DataFrame({'Actual Value':y_test,'Predicted Value':predicted,'Difference':y_test-predicted})
             logging.info(f'The difference between the actual and predicted values are: {pred_df}')
+            
+            plot_test_predicted = plt.scatter(y_test, predicted)
+            plot_visual = "plot_test_predicted.png"
+
+            logging.info(f'visualise y_test and predicted plot in {plot_visual}')
+            plt.close()
             return(
-                r2_square, pred_df
+                r2_square, pred_df, plot_test_predicted
             )
                 
         except Exception as e:
