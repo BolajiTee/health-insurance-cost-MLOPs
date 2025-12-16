@@ -54,6 +54,14 @@ def save_config(file_path, obj):
             dill.dump(obj, file_obj)
     except Exception as e:
         raise CustomException(e,sys)
+    
+    
+def load_object(filepath):
+    try:
+        with open(filepath , "rb") as obj:
+            return dill.load(obj)
+    except Exception as e:
+        raise CustomException(e, sys)
 
 
 def params():
