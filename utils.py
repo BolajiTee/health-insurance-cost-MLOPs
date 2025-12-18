@@ -1,6 +1,8 @@
 import sys
 import os
 import pandas as pd
+import numpy as np
+from datetime import datetime
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
@@ -28,7 +30,7 @@ def transformation_config():
         cat_pipelines = Pipeline(
             steps= [
                 ("imputer", SimpleImputer(strategy="most_frequent")),
-                ("encoder", OneHotEncoder())
+                ("encoder", OneHotEncoder(handle_unknown='ignore'))
             ]
         )
         
@@ -142,6 +144,48 @@ def evaluate_models(X_train, y_train,X_test,y_test,models,param):
 
         return report
     
+    except Exception as e:
+        raise CustomException(e, sys)
+    
+
+
+def save_prediction(features_df: pd.DataFrame, prediction, file_path: str = "datasets/predictions.csv"):
+    """
+    Append input features with their predicted target to a CSV and print to terminal.
+
+    - features_df: DataFrame containing the input features (one or more rows).
+    - prediction: scalar or array-like predictions (one per row in features_df).
+    - file_path: CSV file to append to (created if it doesn't exist).
+    Returns: path to the CSV file.
+    """
+    try:
+        preds = np.asarray(prediction)
+        # normalize to 1D array matching rows in features_df
+        if preds.ndim == 0:
+            preds = np.array([preds.item()])
+        elif preds.ndim > 1:
+            preds = preds.reshape(-1)
+
+        df = features_df.copy().reset_index(drop=True)
+        df["predicted_charges"] = preds.tolist()[: len(df)]
+        df["prediction_time"] = datetime.now().isoformat()
+
+        # ensure folder exists
+        dir_path = os.path.dirname(file_path)
+        if dir_path:
+            os.makedirs(dir_path, exist_ok=True)
+
+        # write header if file doesn't exist, else append without header
+        if not os.path.exists(file_path):
+            df.to_csv(file_path, index=False)
+        else:
+            df.to_csv(file_path, mode="a", header=False, index=False)
+
+        # print the saved rows to terminal
+        print("Saved prediction(s):")
+        print(df)
+
+        return file_path
     except Exception as e:
         raise CustomException(e, sys)
     

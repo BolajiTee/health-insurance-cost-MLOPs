@@ -77,11 +77,10 @@ def transform_data():
         raise CustomException(e,sys)
     
     
-def save_preprocessor():
+def save_preprocessor(preprocessor):
     try:
         logging.info("creating path and pkl file of our preprocessor")
         preprocessor_path = os.path.join("datasets", "preprocessor.pkl")
-        preprocessor = transformation_config()
         
         return (
             save_config(preprocessor_path, preprocessor)

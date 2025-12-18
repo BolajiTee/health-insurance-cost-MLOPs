@@ -27,7 +27,7 @@ class NewData:
                  age: int, 
                  sex: str, 
                  bmi: float, 
-                 children: str, 
+                 children: int, 
                  smoker: str, 
                  region: str):
         
@@ -44,7 +44,7 @@ class NewData:
                 "age" : [self.age],
                 "sex" : [self.sex],
                 "bmi" : [self.bmi],
-                "children" : [self.children],
+                "children" : [int(self.children)],
                 "smoker" : [self.smoker],
                 "region" : [self.region]
                 }

@@ -8,6 +8,7 @@ from log_exception import logging, CustomException
 from load_transformation import load_data, transform_data, save_preprocessor
 from model_trainer import train_model
 from prediction_pipeline import PredictPipeline, NewData
+from utils import save_prediction
 from flask import Flask, request, render_template
 
 application = Flask(__name__)
@@ -31,16 +32,19 @@ def new_predict(): # this "new_predict" will be in the form in the templates
             smoker = request.form.get("smoker"),
             region = request.form.get("region")
         )
-        
+        logging.info("Data gathered from form")
         pred_df = data.make_feature_a_data_frame()
         print(pred_df)
-        print("Before Prediction")
         
-        
+        logging.info("Creating prediction pipeline object")
         pred_new_data = PredictPipeline()
-        print("Mid Prediction")
+        
+        logging.info("Starting prediction.........")
         Charges = pred_new_data.prediction(pred_df)
-        print("after Prediction")
+        logging.info("Prediction completed")
+        
+        logging.info("Save and print the input + prediction to CSV and terminal")
+        save_prediction(pred_df, Charges)    
         
         return render_template("home.html", Charges = Charges[0])
 
@@ -53,8 +57,12 @@ def new_predict(): # this "new_predict" will be in the form in the templates
 
 
 if __name__ == "__main__":
-    app.run(host= "0.0.0.0", debug= True)
+    # Run training pipeline before starting Flask server
+    logging.info("Starting training pipeline")
     load = load_data()
-    transform = transform_data()
-    save_preprocess = save_preprocessor()
+    train_arr, test_arr, preprocessor = transform_data()
+    save_preprocess = save_preprocessor(preprocessor)
     model_trainnig = train_model()
+    logging.info("Training pipeline completed. Starting Flask server.")
+    
+    app.run(host= "0.0.0.0", debug= True)

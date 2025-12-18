@@ -1,0 +1,5 @@
+age,sex,bmi,children,smoker,region,predicted_charges,prediction_time
+46,male,27.0,4,no,South East,10639.997542646895,2025-12-18T22:01:40.734826
+74,male,42.0,2,yes,North East,46214.32119298431,2025-12-18T22:03:03.783059
+21,male,31.0,1,yes,South West,33879.85224870585,2025-12-18T22:04:06.262717
+45,female,41.0,4,yes,North West,42053.021362414685,2025-12-18T22:05:02.535396
