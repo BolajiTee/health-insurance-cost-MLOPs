@@ -1,0 +1,70 @@
+<html>
+    <body>
+        <form action=""{{ url_for('new_predict')}}"">
+            <h1>
+            <legend>Health Insurance Subscription Charges Prediction</legend>
+            </h1>
+            <div class="mb-3">
+            <label class="form-label">Your Age</label>
+            <input class="form-control" type="number" name="age"
+                placeholder="Enter your Age" min='0' max='100' />
+            </div>
+
+            <div class="mb-3">
+            <label class="form-label">Sex</label>
+            <select class="form-control" name="sex" placeholder="Enter you Gender" required>
+                <option class="placeholder" selected disabled value="">Select your Gender</option>
+                <option value="male">
+                    Male
+                </option>
+                <option value="female">
+                    Female
+                </option>
+            </select>
+
+            <div class="mb-3">
+            <label class="form-label">Your BMI</label>
+            <input class="form-control" type="number" name="bmi"
+                placeholder="Enter your BMI" min='0' max='100' />
+            </div>
+
+            <div class="mb-3">
+            <label class="form-label">Children</label>
+            <input class="form-control" type="number" name="children"
+                placeholder="Enter Number Of Children" min='0' max='6' />
+            </div>
+
+            <div class="mb-3">
+            <label class="form-label">Smoker</label>
+            <select class="form-control" name="smoker" placeholder="Are You a Smoker" required>
+                <option class="placeholder" selected disabled value="">Select your Smoking Status</option>
+                <option value="yes">
+                    Yes
+                </option>
+                <option value="no">
+                    No
+                </option>
+            </select>
+
+            <div class="mb-3">
+            <label class="form-label">Region</label>
+            <select class="form-control" name="region" placeholder="Enter your region" required>
+                <option class="placeholder" selected disabled value="">Select Region</option>
+                <option value="South West">
+                    South West
+                </option>
+                <option value="South East">
+                    South East
+                </option>
+                <option value="North West">
+                    North West
+                </option>
+                <option value="North East">
+                    North East
+                </option>
+                
+            </select>
+        </div>
+        </form>
+    </body>
+</html>
