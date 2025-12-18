@@ -1,7 +1,9 @@
 import os
 import sys
+import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 from log_exception import logging, CustomException
 from load_transformation import load_data, transform_data, save_preprocessor
 from model_trainer import train_model
@@ -24,7 +26,7 @@ def new_predict(): # this "new_predict" will be in the form in the templates
         data = NewData(
             age = request.form.get("age"),
             sex = request.form.get("sex"),
-            bmi = request.form.get("bmi"),
+            bmi = float(request.form.get("bmi")),
             children = request.form.get("children"),
             smoker = request.form.get("smoker"),
             region = request.form.get("region")
@@ -32,10 +34,15 @@ def new_predict(): # this "new_predict" will be in the form in the templates
         
         pred_df = data.make_feature_a_data_frame()
         print(pred_df)
-        pred_new_data = PredictPipeline()
-        new_target = pred_new_data.predict(pred_df)
+        print("Before Prediction")
         
-        return render_template("home.html", new_target = new_target[0])
+        
+        pred_new_data = PredictPipeline()
+        print("Mid Prediction")
+        Charges = pred_new_data.prediction(pred_df)
+        print("after Prediction")
+        
+        return render_template("home.html", Charges = Charges[0])
 
 
 

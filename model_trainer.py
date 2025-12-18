@@ -70,17 +70,8 @@ def train_model():
             r2_square = r2_score(y_test, predicted)
             logging.info(f'The accuracy of the best model is {r2_score(y_test, predicted)*100}')
             
-            
-            pred_df=pd.DataFrame({'Actual Value':y_test,'Predicted Value':predicted,'Difference':y_test-predicted})
-            logging.info(f'The difference between the actual and predicted values are: {pred_df}')
-            
-            plot_test_predicted = plt.scatter(y_test, predicted)
-            plot_visual = "plot_test_predicted.png"
-
-            logging.info(f'visualise y_test and predicted plot in {plot_visual}')
-            plt.close()
             return(
-                r2_square, pred_df, plot_test_predicted
+                r2_square
             )
                 
         except Exception as e:

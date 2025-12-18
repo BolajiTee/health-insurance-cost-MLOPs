@@ -1,6 +1,6 @@
 <html>
     <body>
-        <form action=""{{ url_for('new_predict')}}"">
+        <form action="{{ url_for('new_predict')}}" method = "post">
             <h1>
             <legend>Health Insurance Subscription Charges Prediction</legend>
             </h1>
@@ -65,6 +65,12 @@
                 
             </select>
         </div>
+        <div class="mb-3">
+            <input class="btn btn-primary" type="submit" value="Predict Your Charges For  Health Insurances" required />
+        </div>
         </form>
+        <h2>
+            THE  prediction is {{Charges}}
+        </h2>
     </body>
 </html>

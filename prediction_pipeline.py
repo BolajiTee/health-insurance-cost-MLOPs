@@ -9,14 +9,17 @@ class PredictPipeline:
     def __init__(self):
         pass
     
-    def predict(self, features):
-        model_path = "datasets/best_model.pkl"
-        preprocessor_path = "datasets/preprocessor.pkl"
-        model = load_object(model_path)
-        preprocessor = load_object(preprocessor_path)
-        scaled_data = preprocessor.transform(features)
-        pred = model.predict(scaled_data)
-        return pred
+    def prediction(self, features):
+        try:
+            model_path = os.path.join("datasets", "best_model.pkl")
+            preprocessor_path = os.path.join("datasets" , "preprocessor.pkl")
+            model = load_object(filepath = model_path)
+            preprocessor = load_object(filepath = preprocessor_path)
+            scaled_data = preprocessor.transform(features)
+            pred = model.predict(scaled_data)
+            return pred
+        except Exception as e:
+            raise CustomException(e, sys)
     
     
 class NewData:
