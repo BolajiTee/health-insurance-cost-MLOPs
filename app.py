@@ -44,9 +44,9 @@ def new_predict(): # this "new_predict" will be in the form in the templates
         logging.info("Prediction completed")
         
         logging.info("Save and print the input + prediction to CSV and terminal")
-        save_prediction(pred_df, Charges)    
+        save_prediction(pred_df, Charges)
         
-        return render_template("home.html", Charges = Charges[0])
+        return render_template("home.html", Charges = f"{Charges[0]:.2f}")
 
 
 

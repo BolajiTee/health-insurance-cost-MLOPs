@@ -159,7 +159,7 @@ def save_prediction(features_df: pd.DataFrame, prediction, file_path: str = "dat
     Returns: path to the CSV file.
     """
     try:
-        preds = np.asarray(prediction)
+        preds = np.asarray(prediction)  # convert to numpy array
         # normalize to 1D array matching rows in features_df
         if preds.ndim == 0:
             preds = np.array([preds.item()])
