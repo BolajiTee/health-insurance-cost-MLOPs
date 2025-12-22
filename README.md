@@ -157,3 +157,9 @@ python app.py
 
 Contact
 For questions, contact the repo owner or open an issue.
+
+## AUTHOR
+
+**Bolaji Tunde A.**
+Python & Machine Learning Engineer
+tundebolaji16@gmail.com
