@@ -130,6 +130,14 @@ python app.py
 	- Unit tests for preprocessing functions in `load_transformation.py` and `utils.py`.
 	- Integration test for `prediction_pipeline.py` using a small sample CSV.
 
+## ScreenShots
+
+### Index Page
+![Index](screenshots/index.png)
+
+### Home Page
+![Index](screenshots/home.png)
+
 ## Contributing
 - Feel free to open issues or pull requests. Suggested workflow:
 	1. Fork the repo and create a feature branch.
