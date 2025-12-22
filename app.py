@@ -24,13 +24,36 @@ def new_predict(): # this "new_predict" will be in the form in the templates
     if request.method == 'GET':
         return render_template('home.html')
     else:
+        # Validate and convert form inputs to proper types
+        age_raw = request.form.get("age")
+        sex = request.form.get("sex")
+        bmi_raw = request.form.get("bmi")
+        children_raw = request.form.get("children")
+        smoker = request.form.get("smoker")
+        region = request.form.get("region")
+
+        try:
+            age = int(age_raw)
+        except (TypeError, ValueError):
+            return render_template('home.html', error="Invalid age value")
+
+        try:
+            bmi = float(bmi_raw)
+        except (TypeError, ValueError):
+            return render_template('home.html', error="Invalid BMI value")
+
+        try:
+            children = int(children_raw)
+        except (TypeError, ValueError):
+            return render_template('home.html', error="Invalid children value")
+
         data = NewData(
-            age = request.form.get("age"),
-            sex = request.form.get("sex"),
-            bmi = float(request.form.get("bmi")),
-            children = request.form.get("children"),
-            smoker = request.form.get("smoker"),
-            region = request.form.get("region")
+            age=age,
+            sex=sex,
+            bmi=bmi,
+            children=children,
+            smoker=smoker,
+            region=region,
         )
         logging.info("Data gathered from form")
         pred_df = data.make_feature_a_data_frame()
