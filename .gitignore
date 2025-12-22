@@ -1,3 +1,12 @@
+.venv/
+*.pkl
+datasets/predictions.csv
+catboost_info/
+logs/
+*.pyc
+__pycache__/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
