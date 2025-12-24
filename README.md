@@ -133,10 +133,10 @@ python app.py
 ## ScreenShots
 
 ### Index Page
-![Index](screenshots/index.png)
+<p align= "center"><img src= "screenshots/index.png" width="600">Index Image</p>
 
 ### Home Page
-![Index](screenshots/home.png)
+<p align= "center"><img src= "screenshots/home.png" width="600">Home Image</p>
 
 ## Contributing
 - Feel free to open issues or pull requests. Suggested workflow:
