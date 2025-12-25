@@ -5,6 +5,7 @@ catboost_info/
 logs/
 *.pyc
 __pycache__/
+.gitattributes/
 
 
 # Byte-compiled / optimized / DLL files
